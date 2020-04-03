@@ -1,0 +1,33 @@
+{
+  "dataset_reader":{
+    "type":"simple_bert",
+    "pretrained_bert_model_file": "bert-base-uncased",
+  },
+
+  "train_data_path": "data/train.tsv",
+  "validation_data_path": "data/dev.tsv",
+  "test_data_path": "data/test.tsv",
+
+  "model": {
+    "type": "simple_bert",
+    "bert_model_type": "bert_base",
+    "pretrained_archive_path": "https://s3-us-west-2.amazonaws.com/pradeepd-bert-qa-models/bert-base/squad2.0/bert_base_archive.tar.gz",
+    "null_score_difference_threshold": -1.75,
+  },
+
+  "iterator": {
+    "type": "bucket",
+    "sorting_keys": [["source_tokens", "num_tokens"]],
+    "batch_size": 32
+  },
+
+  "trainer": {
+    "num_epochs": 25,
+    "patience": 10,
+    "cuda_device": -1,
+    "optimizer": {
+      "type": "adam",
+      "lr": 0.01
+    }
+  }
+}
